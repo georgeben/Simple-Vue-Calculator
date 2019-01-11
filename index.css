@@ -1,0 +1,74 @@
+body{
+    background-color: #e3e2dd;
+    /* background-color: #41b883; */
+}
+
+header{
+    margin-top: 20px;
+}
+
+header h5{
+    padding: 5px;
+}
+
+.display{
+    background-color: #fff;
+    padding: 5px;
+    height: 115px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.display p{
+    font-size: 2em;
+    margin-bottom: 0;
+}
+
+.button-list{
+    padding: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.button-list button{
+    background-color: #fafafa;
+    border: none;
+    padding: 9px 5px;
+    width: 31%;
+    margin: 1%;
+}
+
+button.operator{
+    background-color: #3f4b5b;
+    color: white;
+}
+
+button.special{
+    width: 47%;
+    background-color: #ff9e1e;
+    color: white;
+    border-bottom-right-radius: 10px;
+}
+
+button.clear{
+    border-radius: 0;
+    border-bottom-left-radius: 10px;
+}
+
+.err{
+    color: red;
+}
+
+#app{
+    width: 251px;
+    margin: auto;
+    height: 500px;
+    background-image: url('./images/frame_res.png');
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    padding: 20px;
+}
+

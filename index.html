@@ -5,28 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vue Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">    
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <div id="app">
-        <div class="result" >
-            <p>{{current}}</p>
-            <div class="button-list" >
+        <div class="calculator" >
+            <header>
+                <h5>Calculator</h5>
+                <div class="display">
+                    <small class="err">{{error}}</small>
+                    <p>{{current}}</p>
+                </div>
+            </header>
+            <div class="button-list">
                 <button v-on:click = "press">1</button>
                 <button v-on:click = "press">2</button>
+                <button v-on:click = "press" class="operator">+</button>
+
                 <button v-on:click = "press">3</button>
                 <button v-on:click = "press">4</button>
+                <button v-on:click = "press" class="operator">-</button>
+
                 <button v-on:click = "press">5</button>
                 <button v-on:click = "press">6</button>
+                <button v-on:click = "press" class="operator">x</button>
+
                 <button v-on:click = "press">7</button>
                 <button v-on:click = "press">8</button>
+                <button v-on:click = "press" class="operator">/</button>
+
                 <button v-on:click = "press">9</button>
                 <button v-on:click = "press">0</button>
-                <button v-on:click = "press">+</button>
-                <button v-on:click = "press">-</button>
-                <button v-on:click = "press">x</button>
-                <button v-on:click = "press">/</button>
-                <button v-on:click = "press"> = </button>
-                <button v-on:click = "press"> C </button>
+                <button v-on:click = "press" class="operator"> = </button>
+               
+                <button v-on:click = "press" class="special clear"> C </button>
+                <button v-on:click = "press" class="special"> DEL </button>
             </div>
         </div>
     </div>
@@ -38,6 +52,7 @@
                 message: 'Hello Vue',
                 current: '0',
                 initial: true,
+                error: '',
             },
             methods: {
                 press: function(event){
@@ -66,6 +81,9 @@
                         case 'x':
                             this.multiply();
                             break;
+                        case 'DEL':
+                            this.backspace();
+                            break;
                         default:
                             this.current = this.current += clickedValue;
                             break;
@@ -74,10 +92,19 @@
 
                 clearScreen: function(event){
                     console.log('Clear screen key was pressed');
-                    this.current = '';
+                    this.current = '0';
+                    this.initial = true;
+                    this.error = '';
                 },
                 caclculate: function(){
-                    this.current = eval(this.current);
+                    //Sanity checks
+                    try{
+                        this.current = eval(this.current);
+                        this.error = '';
+                    }catch(err){
+                        console.log("Invalid equation", err);
+                        this.error = 'Invalid equaltion'
+                    }
                     console.log(this.current);
                     console.log('Equals key was pressed');
                 },
@@ -96,6 +123,14 @@
                 multiply: function(){
                     this.current = this.current += '*';
                     console.log('Multiply key was pressed');
+                },
+                backspace: function(){
+                    if(this.current != '' && this.current.length > 1){
+                        this.current = this.current.substring(0, this.current.length - 1);
+                    }else{
+                        this.current = '0';
+                        this.initial = true;
+                    }
                 }
             },
         })
