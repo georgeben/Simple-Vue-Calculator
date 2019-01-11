@@ -8,17 +8,95 @@
 </head>
 <body>
     <div id="app">
-        <p>{{message}}</p>
+        <div class="result" >
+            <p>{{current}}</p>
+            <div class="button-list" >
+                <button v-on:click = "press">1</button>
+                <button v-on:click = "press">2</button>
+                <button v-on:click = "press">3</button>
+                <button v-on:click = "press">4</button>
+                <button v-on:click = "press">5</button>
+                <button v-on:click = "press">6</button>
+                <button v-on:click = "press">7</button>
+                <button v-on:click = "press">8</button>
+                <button v-on:click = "press">9</button>
+                <button v-on:click = "press">0</button>
+                <button v-on:click = "press">+</button>
+                <button v-on:click = "press">-</button>
+                <button v-on:click = "press">x</button>
+                <button v-on:click = "press">/</button>
+                <button v-on:click = "press"> = </button>
+                <button v-on:click = "press"> C </button>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                message: 'Hello Vue'
+                message: 'Hello Vue',
+                current: '0',
+                initial: true,
             },
             methods: {
-                
+                press: function(event){
+                    var clickedValue = event.target.innerText;
+                    console.log(clickedValue);
+                    if(this.initial){
+                        this.current = '';
+                        this.initial = false;
+                    }
+                    switch(clickedValue){
+                        case '=':
+                            this.caclculate();
+                            break;
+                        case 'C':
+                            this.clearScreen();
+                            break;
+                        case '-':
+                            this.subtract();
+                            break;
+                        case '+':
+                            this.add()
+                            break;
+                        case '/':
+                            this.divide();
+                            break;
+                        case 'x':
+                            this.multiply();
+                            break;
+                        default:
+                            this.current = this.current += clickedValue;
+                            break;
+                    }
+                },
+
+                clearScreen: function(event){
+                    console.log('Clear screen key was pressed');
+                    this.current = '';
+                },
+                caclculate: function(){
+                    this.current = eval(this.current);
+                    console.log(this.current);
+                    console.log('Equals key was pressed');
+                },
+                subtract: function(){
+                    this.current = this.current += '-';
+                    console.log('Minus key was pressed');
+                },
+                add: function(){
+                    this.current = this.current += '+';
+                    console.log('Plus key was pressed');
+                },
+                divide: function(){
+                    this.current = this.current += '/';
+                    console.log('Divide key was pressed');
+                },
+                multiply: function(){
+                    this.current = this.current += '*';
+                    console.log('Multiply key was pressed');
+                }
             },
         })
     </script>
