@@ -57,7 +57,6 @@
             methods: {
                 press: function(event){
                     var clickedValue = event.target.innerText;
-                    console.log(clickedValue);
                     if(this.initial){
                         this.current = '';
                         this.initial = false;
@@ -91,38 +90,29 @@
                 },
 
                 clearScreen: function(event){
-                    console.log('Clear screen key was pressed');
                     this.current = '0';
                     this.initial = true;
                     this.error = '';
                 },
                 caclculate: function(){
-                    //Sanity checks
                     try{
                         this.current = eval(this.current);
                         this.error = '';
                     }catch(err){
-                        console.log("Invalid equation", err);
-                        this.error = 'Invalid equaltion'
+                        this.error = 'Invalid equation'
                     }
-                    console.log(this.current);
-                    console.log('Equals key was pressed');
                 },
                 subtract: function(){
                     this.current = this.current += '-';
-                    console.log('Minus key was pressed');
                 },
                 add: function(){
                     this.current = this.current += '+';
-                    console.log('Plus key was pressed');
                 },
                 divide: function(){
                     this.current = this.current += '/';
-                    console.log('Divide key was pressed');
                 },
                 multiply: function(){
                     this.current = this.current += '*';
-                    console.log('Multiply key was pressed');
                 },
                 backspace: function(){
                     if(this.current != '' && this.current.length > 1){

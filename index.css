@@ -39,6 +39,7 @@ header h5{
     padding: 9px 5px;
     width: 31%;
     margin: 1%;
+    box-shadow: 2px 2px 3px #e3e2dd;
 }
 
 button.operator{
@@ -65,8 +66,9 @@ button.clear{
 #app{
     width: 251px;
     margin: auto;
+    margin-top: 30px;
     height: 500px;
-    background-image: url('./images/frame_res.png');
+    background-image: url('./images/frame.png');
     background-repeat: no-repeat;
     box-sizing: border-box;
     padding: 20px;
